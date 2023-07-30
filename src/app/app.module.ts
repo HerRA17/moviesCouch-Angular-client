@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar'
+import {MatListModule } from '@angular/material/list';
 // import { RetrivingServiceAPIDataService } from './retrieve-api-data.service';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
@@ -52,7 +53,8 @@ const appRoutes: Routes= [
     MatDialogModule,
     MatSnackBarModule,
     MatIconModule, 
-    MatToolbarModule
+    MatToolbarModule,
+    MatListModule
     
   ],
   providers: [],
