@@ -1,0 +1,28 @@
+<p>movie-card works!</p>
+<div style="display: flex;">
+    <mat-card *ngFor="let Movie of Movies;" style="flex: 1 1 auto" >
+        <mat-card-header>
+            <mat-card-title>{{Movie.Title}} </mat-card-title>
+            <mat-card-subtitle>{{Movie.Director.Name}} </mat-card-subtitle>
+        </mat-card-header>
+        <img src={{Movie.ImagePath}} alt={{Movie.title}}>
+        <mat-card-actions>
+            <button
+                mat-button
+                color="primary">
+                Genre
+            </button>
+            <button
+                mat-button
+                color="primary">
+                Director
+            </button>
+            <button
+                mat-button
+                color="primary">
+                Sinopsis
+            </button>
+            <mat-icon> Favorite_Movies</mat-icon>
+        </mat-card-actions>
+    </mat-card>
+</div>
