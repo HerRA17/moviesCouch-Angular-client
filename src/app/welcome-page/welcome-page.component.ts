@@ -16,13 +16,13 @@ export class WelcomePageComponent {
   // function opens dialog when sign up button is clicked
   openUserRegistration(): void{
     this.dialog.open(UserRegistrationFormComponent, {
-      width: '290px'
+      width: '20rem'
     });
   }
   // function opens dialog when login button is clicked
   openUserLogin(): void{
   this.dialog.open(UserLoginFormComponent, {
-    width: '290px'
+    width: '20rem'
   })
 }
 }
