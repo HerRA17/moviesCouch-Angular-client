@@ -1,0 +1,55 @@
+/* movie-card.component.scss */
+
+/* Flex container for cards */
+.movie-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: black;
+  }
+  
+  /* Individual card styles */
+  .movie-card {
+    width: calc(33.33% - 20px); /* Adjust the card width to fit three cards per row */
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+  
+    .movie-card-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 8px;
+      color: orangered;
+    }
+  
+    .movie-card-subtitle {
+      font-size: 16px;
+      margin: 8px;
+      color: orangered;
+    }
+  
+  
+    .movie-card-image {
+      width: 100%;
+      height: auto;
+    }
+      
+    .movie-card-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      padding: 8px;
+      
+      .button-info {
+        color:black;
+        padding: 2px;
+        margin: 2px 0px;
+      }
+       
+      mat-icon {
+        color: orangered;
+      }
+    }
+  }
+  
