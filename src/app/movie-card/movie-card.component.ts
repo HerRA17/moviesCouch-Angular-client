@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { RetrivingServiceAPIDataService } from '../retrieve-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { Title } from '@angular/platform-browser';
+import { MatSnackBar } from '@angular/material/snack-bar';
+// imported TS components
+import { RetrivingServiceAPIDataService } from '../retrieve-api-data.service';
+import { MovieDetailsComponent } from '../movie-details/movie-details.component';
+import { DirectorComponent } from '../director/director.component';
+import { GenreComponent } from '../genre/genre.component';
+
 
 @Component({
   selector: 'app-movie-card',
@@ -10,50 +16,79 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent {
-  Movies: any[] = [];
+  Movies: any = [];
   
-  constructor(public retrivingServiceApiData :RetrivingServiceAPIDataService) {}
+  constructor(
+    public retrivingServiceApiData :RetrivingServiceAPIDataService,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
+    ) {}
   ngOnInit(): void {
-    this.getMovies();
-    this.getMovie();
-    this.getDirector();
-    this.getGenre();
+    this.getMovies()
     }
+  //movies CRUD operations 
   getMovies(): void {
     this.retrivingServiceApiData.getAllMovies().subscribe((resp: any) => {
+      console.log('Movies', resp);
       this.Movies = resp;
-      console.log(this.Movies);
       return this.Movies;
     })
   }
   getMovie(Title: string): void{
-    this.retrivingServiceApiData.getMovie(MoviesTitle).subscribe((resp: string) => {
+    this.retrivingServiceApiData.getMovie(Title).subscribe((resp: string) => {
+      console.log('Title', resp);
       this.Movies = resp;
-      console.log(this.Movies);
       return this.Movies;
     })
   }
-  getDirector(Director: object, Name:string): void {
-    this.retrivingServiceApiData.getDirector(Drirector, Name).subscribe((resp: object) => {
-      this.Director = resp;
-      console.log(this.Director);
-      return this.getDirector;
-    })
-
-  }
-  getGenre(Genre: object, Name: string): void {
-    this.retrivingServiceApiData.getGenre(Genre, Name).subscribe((resp: object) => {
-      this.Genre = resp;
-      console.log(this.Genre);
-      return this.Genre;
-    })
+  
+  getDirector(Name: string, Bio: string, Birthdate: string, Deaththdate: string): void {
+    this.dialog.open(DirectorComponent, {
+      data:{
+        Name: Name,
+        Bio: Bio,
+        Birthdate: Birthdate,
+        Deaththdate: Deaththdate  
+    },
+      width: '25rem'
+    });
   }
 
-  getSynopsis(Description: string): void {
-    this.retrivingServiceApiData.getSynopsis(Description).subscribe((resp: string) => {
-      this.Description = resp;
-      console.log(this.Description);
-      return this.Description;
+  getGenre(Name: string, Description: string): void {
+    this.dialog.open(GenreComponent, {
+      data: {
+        Name: Name,
+        Description: Description
+      },
+      width: '25rem'
+    });
+  }
+
+  getSynopsis(Title: string, Description: string): void {
+    this.dialog.open(MovieDetailsComponent,  {
+      data: {
+        Title: Title,
+        Description: Description 
+      },
+      width: '25rem'
+    });
+  }
+  // Fav Movies CRUD operations
+  addFavoriteMovies(id: string): void{
+    this.retrivingServiceApiData.addFavMovie(id).subscribe((resp) => {
+      this.snackBar.open('Movie has been added to favorite Movies', 'OK', {
+        duration: 2000
+      });
+      this.ngOnInit();
     })
   }
+
+  deleteFavoriteMovies(id: string): void {
+    this.retrivingServiceApiData.deleteFavMovie(id).subscribe((resp) => {
+      this.snackBar.open('Movie removed from favorite Movies', 'OK', {
+        duration: 2000
+      })
+      this.ngOnInit();
+  });
+}
 }
