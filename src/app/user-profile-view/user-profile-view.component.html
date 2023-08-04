@@ -1,5 +1,5 @@
-<p>user-profile-view works!</p>
-<div style="padding:1rem">
+<app-nav-bar></app-nav-bar>
+<div class="container">
     <h1>Profile</h1>
     <p>Username: {{user.Username}}</p>
     <p>Email: {{user.Email}}</p>
@@ -8,27 +8,27 @@
     <mat-list>
       <mat-list-item *ngFor="let movie of favoriteMovies">
         <img matListItemAvatar src="{{movie.ImagePath}}" />
-        <div matListItemTitle>{{movie.Title}}</div>
-        <div matListItemLine>{{movie.Director.Name}}</div>
+        <div matListItemTitle class="content">{{movie.Title}}</div>
+        <div matListItemLine class="content">{{movie.Director.Name}}</div>
       </mat-list-item>
     </mat-list>
   
     <h2>Update Profile</h2>
     <form>
-      <mat-form-field>
+      <mat-form-field class="Password">
         <input matInput [(ngModel)]="userData.Password" minlength="8" type="password" placeholder="Password"
           name="Password" required>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="Email">
         <input matInput [(ngModel)]="userData.Email" type="email" placeholder="Email" name="Email" required>
       </mat-form-field>
-      <mat-form-field>
-        <input matInput [(ngModel)]="userData.Birthday" type="date" placeholder="Birthday" name="Birthday">
+      <mat-form-field class="Birthday">
+        <input matInput [(ngModel)]="userData.Birthdate" type="date" placeholder="Birthdate" name="Birthdate">
       </mat-form-field>
     </form>
-    <button mat-raised-button (click)="updateUser()" color="primary">
-      Update
+    <button mat-raised-button class="button-update" (click)="updateUser()" color="warn">
+      Update Account
     </button>
   
-    <button mat-button (click)="deleteUser()" color="warn">Remove account permanently</button>
+    <button mat-raised-button class="button-delete" (click)="deleteAccount()" color="warn">Delete account permanently</button>
   </div>

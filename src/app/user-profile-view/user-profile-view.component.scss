@@ -1,0 +1,15 @@
+.container{
+    padding:1rem;
+    background-color: black;
+}
+h1, h2, p, .content {
+    color: orangered;
+}
+.Password, .Email, .Birthday {
+    padding: 0px 6px;
+}
+
+.button-update, .button-delete {
+    color: black !important;
+    margin: 0px 50px;
+}
