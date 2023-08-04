@@ -8,7 +8,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 // import router
 import { Router } from '@angular/router';
 // date formating
-import { formatDate } from '@angular/common';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-user-profile-view',
@@ -19,48 +20,101 @@ export class UserProfileViewComponent implements OnInit{
 user: any = { };
 favoriteMovies: any = [];
 
-@Input() userData = {Username: '', Password: '', Email: '', Birthday: ''}
+@Input() userData = {Username: '', Password: '', Email: '', Birthdate: ''}
 constructor(
     public retrievingServiceApiData: RetrivingServiceAPIDataService,
     public snackBar: MatSnackBar,
+    // public dialogRef: MatDialogRef,
     private router: Router
 ) {}
 
 ngOnInit(): void{
-this.getUser();
-}
+  this.getUserInfo();
+  this.getFavoriteMovies();
 
-getUser(): void {
-  this.retrievingServiceApiData.getUser().subscribe((user) => {
-    console.log(user);
-    this.user = user;
-    this.userData.Username = this.user.Username
-    this.userData.Email = this.user.Email
-    this.userData.Birthday = formatDate(this.user.Birthday, 'dd-mm-yyyy', '', '')
-    this.retrievingServiceApiData.getAllMovies().subscribe((resp: any) => {
-      this.favoriteMovies = resp.filter((m: {_id: any}) => this.user.favoriteMovies.indexOf(m._id) >= 0)
-    })
+
+  // Subscribe to favoriteMovies updates
+  this.retrievingServiceApiData.updateUserObject.subscribe(() => {
+    this.getUserInfo();
+    this.getFavoriteMovies();
   })
 }
 
-updateUser(userDetails: any): void{
-  this.retrievingServiceApiData.editUser(userDetails).subscribe((result) => {
-    console.log(result);
-    localStorage.setItem('user', JSON.stringify(result));
-    this.snackBar.open('User successfullyupdated', 'OK', {
+getUserInfo(): string | undefined {
+    const userString = localStorage.getItem('user');
+    if (userString) {
+      this.user = JSON.parse(userString);
+      return this.user; 
+    } else { 
+      this.router.navigate(['welcome']);
+      return
+    }
+  }
+
+getUpdatedUserDetails(): any {
+  let updateUserData: {
+    Username?: string;
+    Password?: string;
+    Email?: string;
+    Birthdate?: string;
+  } = {};
+  
+  if (this.userData.Username !== '') {
+    updateUserData.Username = this.userData.Username;
+  } if (this.userData.Password !== '') {
+    updateUserData.Password = this.userData.Password;
+  } if (this.userData.Email !== '') {
+    updateUserData.Email = this.userData.Email;
+  } if (this.userData.Birthdate !== '') {
+    updateUserData.Birthdate = this.userData.Birthdate;
+  }
+  return Object.keys(updateUserData).length === 0 ? null : updateUserData;
+}
+
+updateUser(): void{
+  const updateUserData = this.getUpdatedUserDetails();
+  if (!updateUserData) {
+    this.snackBar.open('No changes to update!', 'OK', {
       duration: 2000
     });
-  }, (result) => {
-    this.snackBar.open(result, 'OK', {
-      duration: 2000
-    });
+    return;
+  }
+  this.retrievingServiceApiData.editeUser(updateUserData).subscribe({
+    next: (result) => {
+      console.log(result);
+      // this.dialogRef.close();
+      this.snackBar.open('Update successfull!', 'OK', {
+        duration: 2000
+      });
+      localStorage.setItem('user', JSON.stringify(result));
+      this.retrievingServiceApiData.updateUserObject.next();
+    },
+    error: (error) => {
+      let errorMessage = error.Message;
+      console.error(errorMessage);
+      this.snackBar.open(errorMessage, 'OK', {
+        duration: 2000
+      });
+    }
   });
 }
 
-deleteUser(userDetails: any): void {
-this.retrievingServiceApiData.deleteUser(userDetails).subscribe((result) => {
+getFavoriteMovies() {
+  const usersFavoriteMovies =  this.user.favoriteMovies;
+  this.retrievingServiceApiData.getAllMovies().subscribe((resp) => {
+    console.log('getFavoriteMovies response: ' + resp);
+    this.favoriteMovies = usersFavoriteMovies.map((MovieID: string) => {
+      return resp.find((Movie: any) => Movie._id === MovieID)
+    });
+    console.log('this are the favorite movies: ' + this.favoriteMovies)
+  });
+}
+
+
+deleteAccount(): void {
+this.retrievingServiceApiData.deleteUser().subscribe((result) => {
   console.log(result);
-  localStorage.clear;
+  localStorage.clear();
   this.router.navigate(['welcome']);
   this.snackBar.open('User successfully deleted', 'OK', {
     duration: 2000
