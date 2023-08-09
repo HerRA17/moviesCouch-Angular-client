@@ -26,7 +26,7 @@ export class UserLoginFormComponent implements OnInit {
     // function responsible for sending the form inputs to the backend
     loginUser(): void {
       this.retrievingServiceApiData.userLogin(this.loginData).subscribe((response) => {
-        localStorage.setItem('Username', response.user.Username);
+        localStorage.setItem('user', response.user.Username); //check the logic to fix the bug
         localStorage.setItem('token', response.token);
         this.router.navigate(['Movies']);
         // logic for successful login
