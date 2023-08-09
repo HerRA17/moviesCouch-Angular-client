@@ -32,12 +32,15 @@ public userLogin(userDetails: any): Observable<any> {
 }
 
 // whenever there is an update, a value get emitted to subscriber
-updateUserObject: Subject<void> = new Subject<void>();
+// updateUserObject: Subject<void> = new Subject<void>();
 
 public getUser(): Observable<any> {
-  const Username = JSON.parse(localStorage.getItem('user') || '{}');
+  const user = localStorage.getItem('user') || '{}';
   const token = localStorage.getItem('token');
-  return this.http.get(apiURL + '/users/' + Username, {
+  if (!user || !token) {
+    return throwError('User or token not found');
+  }
+  return this.http.get(apiURL + '/users/' + user, {
     headers: new HttpHeaders
     ({
       Authorization: 'Bearer ' + token,
@@ -48,9 +51,10 @@ public getUser(): Observable<any> {
 }
 
 public editeUser(updatedDetails: any): Observable<any> {
+  const user = localStorage.getItem('user');
   const token = localStorage.getItem('token');
   console.log(updatedDetails)
-  return this.http.put(apiURL + '/users/' + this.getUsername(), updatedDetails, {
+  return this.http.put(apiURL + '/users/' + user, updatedDetails, {
     headers: new HttpHeaders
     ({
       Authorization: 'Bearer ' + token,
@@ -60,16 +64,10 @@ public editeUser(updatedDetails: any): Observable<any> {
   );
 }
 
-private getUsername(): string {
-  const userString = localStorage.getItem('user');
-  const user = userString ? JSON.parse(userString) : null;
-  const Username =  user?.Username;
-  return Username;
-}
-
 public deleteUser(): Observable<any> {
+  const user = localStorage.getItem('user');
   const token = localStorage.getItem('token');
-  return this.http.delete(apiURL + '/users/' + this.getUsername() , {
+  return this.http.delete(apiURL + '/users/' + user, {
     headers: new HttpHeaders
     ({
       Authorization: 'Bearer ' + token,
@@ -80,8 +78,9 @@ public deleteUser(): Observable<any> {
 }
 
 public addFavMovie(MovieID: string): Observable<any> {
+  const user = localStorage.getItem('user');
   const token = localStorage.getItem('token');
-  return this.http.put(`${apiURL} + /users/ + ${this.getUsername()} + /favMovies/ + ${MovieID}`, 
+  return this.http.post(`${apiURL} + /users/ + ${user} + /favMovies/ + ${MovieID}`, //error
     { FavoriteMovies: MovieID} ,
     {
       headers: new HttpHeaders
@@ -94,8 +93,9 @@ public addFavMovie(MovieID: string): Observable<any> {
 }
 
 public deleteFavMovie(MovieID: string): Observable<any> {
+  const user = localStorage.getItem('user');
   const token = localStorage.getItem('token');
-  return this.http.delete(`${apiURL} + /users/ + ${this.getUsername()}+ /favMovies/ + ${MovieID}`, {
+  return this.http.delete(`${apiURL} + /users/ + ${user}+ /favMovies/ + ${MovieID}`, { //error
     headers: new HttpHeaders
     ({
       Authorization: 'Bearer ' + token,
