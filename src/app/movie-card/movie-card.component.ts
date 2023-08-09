@@ -26,6 +26,9 @@ export class MovieCardComponent {
   ngOnInit(): void {
     this.getMovies()
     }
+
+  favMovies: any[] = [];
+  
   //movies CRUD operations 
   getMovies(): void {
     this.retrivingServiceApiData.getAllMovies().subscribe((resp: any) => {
@@ -74,21 +77,37 @@ export class MovieCardComponent {
     });
   }
   // Fav Movies CRUD operations
-  addFavoriteMovies(id: string): void{
-    this.retrivingServiceApiData.addFavMovie(id).subscribe((resp) => {
-      this.snackBar.open('Movie has been added to favorite Movies', 'OK', {
-        duration: 2000
-      });
-      this.ngOnInit();
-    })
+  addFavoriteMovies(MovieID: string): void{
+    let username = localStorage.getItem('user');
+    let token = localStorage.getItem('token');
+    console.log('token', token);
+    console.log('MovieID', MovieID);
+    console.log('username', username);
+    if (username) {
+      this.retrivingServiceApiData.addFavMovie(MovieID).subscribe((resp) => {
+        console.log(resp)
+        this.snackBar.open('Movie has been added to favorite Movies', 'OK', {
+          duration: 2000
+        });
+        this.favMovies = resp.favMovies;
+      })
+    } 
   }
 
-  deleteFavoriteMovies(id: string): void {
-    this.retrivingServiceApiData.deleteFavMovie(id).subscribe((resp) => {
-      this.snackBar.open('Movie removed from favorite Movies', 'OK', {
-        duration: 2000
-      })
-      this.ngOnInit();
-  });
+  isFavMovies(MovieID: string): boolean {
+    return this.favMovies.includes(MovieID);
+  }
+
+  deleteFavoriteMovies(MovieID: string): void {
+    let username = localStorage.getItem('user');
+    console.log('username', username);
+    if (username) {
+      this.retrivingServiceApiData.deleteFavMovie(MovieID).subscribe((resp) => {
+        this.snackBar.open('Movie removed from favorite Movies', 'OK', {
+          duration: 2000
+        })
+        this.favMovies = resp.favMovies;
+    });
+    }
 }
 }
