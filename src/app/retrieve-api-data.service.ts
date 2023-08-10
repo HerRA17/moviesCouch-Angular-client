@@ -9,11 +9,6 @@ const apiURL = 'https://movies-couch-api.vercel.app';
 @Injectable({  providedIn: 'root' })
 
 export class RetrivingServiceAPIDataService {
-  // setting the logic for the user-data
-  private user: any;
-  setUser(userData: any): void{
-    this.user = userData;
-  } 
 // injected HttpClient module to constructor params
   constructor(private http: HttpClient) {}
 
@@ -30,9 +25,6 @@ public userLogin(userDetails: any): Observable<any> {
   console.log(userDetails); 
   return this.http.post(apiURL + '/login', userDetails).pipe( catchError(this.handleError) );
 }
-
-// whenever there is an update, a value get emitted to subscriber
-// updateUserObject: Subject<void> = new Subject<void>();
 
 public getUser(): Observable<any> {
   const user = localStorage.getItem('user') || '{}';
@@ -51,10 +43,10 @@ public getUser(): Observable<any> {
 }
 
 public editeUser(updatedDetails: any): Observable<any> {
-  const user = localStorage.getItem('user');
+  const Username = localStorage.getItem('user');
   const token = localStorage.getItem('token');
   console.log(updatedDetails)
-  return this.http.put(apiURL + '/users/' + user, updatedDetails, {
+  return this.http.put(apiURL + '/users/' + Username, updatedDetails, {
     headers: new HttpHeaders
     ({
       Authorization: 'Bearer ' + token,
@@ -77,11 +69,11 @@ public deleteUser(): Observable<any> {
   );
 }
 
-public addFavMovie(MovieID: string): Observable<any> {
+public addFavMovie(Username: string, MovieID: string): Observable<any> {
   const user = localStorage.getItem('user');
+  console.log(user);
   const token = localStorage.getItem('token');
-  return this.http.post(`${apiURL} + /users/ + ${user} + /favMovies/ + ${MovieID}`, //error
-    { FavoriteMovies: MovieID} ,
+  return this.http.post(`${apiURL} + /users/${Username} + /favMovies/ + ${MovieID}`, //error
     {
       headers: new HttpHeaders
       ({
@@ -92,10 +84,10 @@ public addFavMovie(MovieID: string): Observable<any> {
     );
 }
 
-public deleteFavMovie(MovieID: string): Observable<any> {
+public deleteFavMovie(Username: string, MovieID: string): Observable<any> {
   const user = localStorage.getItem('user');
   const token = localStorage.getItem('token');
-  return this.http.delete(`${apiURL} + /users/ + ${user}+ /favMovies/ + ${MovieID}`, { //error
+  return this.http.delete(`${apiURL} + /users/${Username} + /favMovies/ + ${MovieID}`, { //error
     headers: new HttpHeaders
     ({
       Authorization: 'Bearer ' + token,
