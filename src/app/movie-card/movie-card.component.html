@@ -15,12 +15,13 @@
          movie.Director.Birthdate, movie.Director.Deathdate)">Director</button>
         <button mat-raised-button class="button-info" color="warn" (click)="getSynopsis(movie.Title, movie.Description)">Synopsis</button>
         <button 
-        mat-button (click)="addFavoriteMovies(movie._id)" color="warn">
+        mat-button *ngIf="!isFavMovie(movie._id)" (click)="addFavoriteMovies(movie._id)" color="warn"
+        matTooltip="Add to favorites">
         <mat-icon > favorite_border</mat-icon>
         </button>
-        <!-- *ngIf="isFavorite(movie._id)" should go within mat-buttons -->
         <button 
-        mat-button (click)="deleteFavoriteMovies(movie._id)" color="warn">
+        mat-button *ngIf="isFavMovie(movie._id)" (click)="deleteFavoriteMovies(movie._id)" color="warn"
+        matTooltip="Remove from favorites">
         <mat-icon > favorite</mat-icon>
         </button>
       </div>
