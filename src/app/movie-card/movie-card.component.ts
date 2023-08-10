@@ -17,17 +17,19 @@ import { GenreComponent } from '../genre/genre.component';
 })
 export class MovieCardComponent {
   Movies: any = [];
-  
+  favoriteMovies: any[] = [];
+
   constructor(
     public retrivingServiceApiData :RetrivingServiceAPIDataService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
     ) {}
+    
   ngOnInit(): void {
     this.getMovies()
     }
 
-  favMovies: any[] = [];
+ 
   
   //movies CRUD operations 
   getMovies(): void {
@@ -84,29 +86,29 @@ export class MovieCardComponent {
     console.log('MovieID', MovieID);
     console.log('username', username);
     if (username) {
-      this.retrivingServiceApiData.addFavMovie(MovieID).subscribe((resp) => {
+      this.retrivingServiceApiData.addFavMovie(username, MovieID).subscribe((resp) => {
         console.log(resp)
         this.snackBar.open('Movie has been added to favorite Movies', 'OK', {
           duration: 2000
         });
-        this.favMovies = resp.favMovies;
+        this.favoriteMovies = resp.FavoriteMovies;
       })
     } 
   }
 
-  isFavMovies(MovieID: string): boolean {
-    return this.favMovies.includes(MovieID);
+  isFavMovie(MovieID: string): boolean {
+    return this.favoriteMovies.includes(MovieID);
   }
 
   deleteFavoriteMovies(MovieID: string): void {
     let username = localStorage.getItem('user');
     console.log('username', username);
     if (username) {
-      this.retrivingServiceApiData.deleteFavMovie(MovieID).subscribe((resp) => {
+      this.retrivingServiceApiData.deleteFavMovie(username, MovieID).subscribe((resp) => {
         this.snackBar.open('Movie removed from favorite Movies', 'OK', {
           duration: 2000
         })
-        this.favMovies = resp.favMovies;
+        this.favoriteMovies = resp.FavoriteMovies;
     });
     }
 }
