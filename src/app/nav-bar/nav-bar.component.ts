@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,17 +7,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent {
-  @Input() user: any;
-   
+  
   constructor(
-    private router: Router,
-    private  renderer: Renderer2
-  ) {}
+    private router: Router) {}
   ngOnInit(): void {
-    // span identifier fro visual hidden
-    const spanElement = document.querySelector('.icon-reader');
-    // adding cdk-visually-hidden class
-    this.renderer.addClass(spanElement, 'cdk-visually-hidden');  
   }
 
     toMovies(): void{
