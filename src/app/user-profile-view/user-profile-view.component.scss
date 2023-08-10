@@ -1,3 +1,8 @@
+$breaking-point-Phone_S: 320px;
+$breaking-point-Phone_M: 375px;
+$breaking-point-Phone_L: 425px;
+$breaking-point-Tablet: 768px;
+
 .container{
     padding:1rem;
     background-color: black;
@@ -12,4 +17,20 @@ h1, h2, p, .content {
 .button-update, .button-delete {
     color: black !important;
     margin: 0px 50px;
+}
+
+// MEdia-queries
+@media (min-width: $breaking-point-Phone_S) {
+    
+}
+@media (min-width: $breaking-point-Phone_M) {
+    
+}
+@media (min-width: $breaking-point-Phone_L) {
+    .button-update, .button-delete {
+        margin: 10px 50px;
+    }
+}
+@media (min-width: $breaking-point-Tablet) {
+
 }
