@@ -18,7 +18,7 @@ import { DatePipe } from '@angular/common';
 })
 export class UserProfileViewComponent implements OnInit{
 user: any;
-favMovies: any = [];
+favoriteMovies: any = [];
 
 @Input() userData = {Username: '', Password: '', Email: '', Birthdate: ''}
 constructor(
@@ -28,18 +28,22 @@ constructor(
 ) {}
 
 ngOnInit(): void{
-  this.getUserInfo(); // error -ngOnInit
+  this.getUserInfo();
 }
 
 getUserInfo(): any {
     this.retrievingServiceApiData.getUser().subscribe((user) =>{
-      console.log(user);
+      console.log('user', user);
       this.user = user;
       this.userData.Username = this.user.Username;
       this.userData.Email = this.user.Email;
       this.userData.Birthdate = this.user.Birthdate;
       this.retrievingServiceApiData.getAllMovies().subscribe((response: any) => {
-        this.favMovies = response.filter((Movie: any)=> this.user.favMovies.includes(Movie._id)) // error
+        console.log('Response: ', response)
+        console.log('User favorite movies' , this.user.favoriteMovies)
+        this.favoriteMovies = response.filter((Movie: any)=> this.user.FavoriteMovies.includes(Movie._id))
+        console.log('Favorite movies after filtering', this.favoriteMovies);
+        console.log('User after filtering', this.user);
       return this.user;
       });
     });
