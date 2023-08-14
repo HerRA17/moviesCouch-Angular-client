@@ -16,7 +16,7 @@ import { GenreComponent } from '../genre/genre.component';
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent {
-  Movies: any = [];
+  movies: any = [];
   favoriteMovies: any[] = [];
 
   constructor(
@@ -24,7 +24,7 @@ export class MovieCardComponent {
     public dialog: MatDialog,
     public snackBar: MatSnackBar
     ) {}
-    
+
   ngOnInit(): void {
     this.getMovies()
     }
@@ -34,59 +34,57 @@ export class MovieCardComponent {
   //movies CRUD operations 
   getMovies(): void {
     this.retrivingServiceApiData.getAllMovies().subscribe((resp: any) => {
-      console.log('Movies', resp);
-      this.Movies = resp;
-      return this.Movies;
+      console.log('movies', resp);
+      this.movies = resp;
+      return this.movies;
     })
   }
-  getMovie(Title: string): void{
-    this.retrivingServiceApiData.getMovie(Title).subscribe((resp: string) => {
-      console.log('Title', resp);
-      this.Movies = resp;
-      return this.Movies;
+  getMovie(title: string): void{
+    this.retrivingServiceApiData.getMovie(title).subscribe((resp: string) => {
+      console.log('title', resp);
+      this.movies = resp;
+      return this.movies;
     })
   }
   
-  getDirector(Name: string, Bio: string, Birthdate: string, Deaththdate: string): void {
+  getDirector(name: string, bio: string, birthdate: string, deaththdate: string): void {
     this.dialog.open(DirectorComponent, {
       data:{
-        Name: Name,
-        Bio: Bio,
-        Birthdate: Birthdate,
-        Deaththdate: Deaththdate  
+        Name: name,
+        Bio: bio,
+        Birthdate: birthdate,
+        Deaththdate: deaththdate  
     },
       width: '25rem'
     });
   }
 
-  getGenre(Name: string, Description: string): void {
+  getGenre(name: string, description: string): void {
     this.dialog.open(GenreComponent, {
       data: {
-        Name: Name,
-        Description: Description
+        Name: name,
+        Description: description
       },
       width: '25rem'
     });
   }
 
-  getSynopsis(Title: string, Description: string): void {
+  getSynopsis(title: string, description: string): void {
     this.dialog.open(MovieDetailsComponent,  {
       data: {
-        Title: Title,
-        Description: Description 
+        Title: title,
+        Description: description 
       },
       width: '25rem'
     });
   }
   // Fav Movies CRUD operations
-  addFavoriteMovies(MovieID: string): void{
+  addFavoriteMovies(movieID: string): void{
     let username = localStorage.getItem('user');
-    let token = localStorage.getItem('token');
-    console.log('token', token);
-    console.log('MovieID', MovieID);
+    console.log('movieID', movieID);
     console.log('username', username);
     if (username) {
-      this.retrivingServiceApiData.addFavMovie(username, MovieID).subscribe((resp) => {
+      this.retrivingServiceApiData.addFavMovie(username, movieID).subscribe((resp) => { //error
         console.log(resp)
         this.snackBar.open('Movie has been added to favorite Movies', 'OK', {
           duration: 2000
@@ -96,15 +94,17 @@ export class MovieCardComponent {
     } 
   }
 
-  isFavMovie(MovieID: string): boolean {
-    return this.favoriteMovies.includes(MovieID);
+  isFavMovie(movieID: string): boolean {
+    return this.favoriteMovies.includes(movieID);
   }
 
-  deleteFavoriteMovies(MovieID: string): void {
+  deleteFavoriteMovies(movieID: string): void {
     let username = localStorage.getItem('user');
     console.log('username', username);
+    console.log('movieID', movieID);
     if (username) {
-      this.retrivingServiceApiData.deleteFavMovie(username, MovieID).subscribe((resp) => {
+      this.retrivingServiceApiData.deleteFavMovie(username, movieID).subscribe((resp) => {
+        console.log(resp)
         this.snackBar.open('Movie removed from favorite Movies', 'OK', {
           duration: 2000
         })
