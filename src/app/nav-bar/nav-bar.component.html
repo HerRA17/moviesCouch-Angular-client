@@ -1,0 +1,12 @@
+<mat-toolbar class="nav-bar"> 
+    <a mat-button (click)="toMovies()" class="nav-button" target="_blank">Movies Couch</a>
+    <span class="example-spacer"></span>
+    
+    <button mat-icon-button matTooltip="Profile" (click)="toProfile()" class="person-icon" aria-lable="Person icon-button">
+        <mat-icon> account_box </mat-icon>
+    </button>
+    
+    <button mat-icon-button matTooltip="Logout" (click)="logOut()" class="logout-icon" aria-lable="Logout icon-button">
+        <mat-icon> logout</mat-icon>
+    </button>
+</mat-toolbar>

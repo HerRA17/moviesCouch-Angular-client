@@ -1,7 +1,6 @@
-<p>user-registration-form works!</p>
-<mat-card>
+<mat-card class="container">
     <mat-card-header>
-        <mat-card-title>Sign up</mat-card-title>
+        <mat-card-title class="title">Sign up</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <form>
@@ -38,19 +37,20 @@
             <mat-form-field>
                 <input
                 matInput
-                [(ngModel)]="userData.Birthday"
-                placeholder="Birthday"
+                [(ngModel)]="userData.Birthdate"
+                placeholder="Birthdate"
                 type="date"
-                name="Birthday"
+                name="Birthdate"
                 required >
             </mat-form-field>
         </form>
     </mat-card-content>
     <mat-card-actions>
         <button
+            class="button-signup"
             mat-raised-button
             (click)="registerUser()"
-            color="primary">
+            color="warn">
              Sign Up</button>
     </mat-card-actions>
 </mat-card>

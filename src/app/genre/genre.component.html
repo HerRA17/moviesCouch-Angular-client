@@ -1,0 +1,16 @@
+<mat-card class="container"> 
+    <button
+        mat-stroked-button
+        arial-label="Close the synopsis button"
+        mat-dialog-close
+        color="warn"
+        >X</button>
+    <mat-card-title>
+        <h3 class="summary-dialog-title">
+            Name: {{data.Name}}
+        </h3>
+    </mat-card-title>
+    <mat-dialog-content class="summary-dialog-content">
+        Description: {{data.Description}}
+    </mat-dialog-content>
+</mat-card> 

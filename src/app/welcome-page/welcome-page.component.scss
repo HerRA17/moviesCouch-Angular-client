@@ -1,0 +1,19 @@
+.main-page {
+    background-color: black;
+    width: auto;
+    height: auto;
+    text-align: center;
+    justify-content: center;
+    flex-direction:column;
+
+}
+h1 {
+    color: orangered;
+}  
+
+.signup-login {
+    flex: 1;
+    color: black !important;
+    padding: .75rem .25rem;
+    margin: .5rem;
+}

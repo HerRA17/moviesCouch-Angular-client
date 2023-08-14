@@ -5,6 +5,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { RetrivingServiceAPIDataService } from '../retrieve-api-data.service';
 // This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
+// import router
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-user-login-form',
@@ -16,14 +19,16 @@ export class UserLoginFormComponent implements OnInit {
   constructor(
     public retrievingServiceApiData: RetrivingServiceAPIDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
-    public snackBar: MatSnackBar ) {  } 
+    public snackBar: MatSnackBar,
+    private router: Router ) {  } 
     ngOnInit(): void{ 
     }
     // function responsible for sending the form inputs to the backend
     loginUser(): void {
       this.retrievingServiceApiData.userLogin(this.loginData).subscribe((response) => {
-        localStorage.setItem('Username', response.user.Username);
+        localStorage.setItem('user', response.user.Username); //check the logic to fix the bug
         localStorage.setItem('token', response.token);
+        this.router.navigate(['Movies']);
         // logic for successful login
         this.dialogRef.close() //close dialog on success
         console.log(response);

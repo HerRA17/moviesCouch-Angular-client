@@ -1,0 +1,30 @@
+<app-nav-bar></app-nav-bar>
+<!-- movie-card.component.html -->
+<div class="movie-card-container">
+    <!-- ngFor loop to display movie cards -->
+    <div class="movie-card" *ngFor="let movie of movies">
+      <!-- Card content goes here -->
+      <mat-card-title class="movie-card-title">{{ movie.Title }}</mat-card-title>
+      <br>
+      <mat-card-subtitle class="movie-card-subtitle"> Director: {{movie.Director.Name}} </mat-card-subtitle>
+      <img class="movie-card-image" [src]="movie.ImageURL" [alt]="movie.Title" />
+      <br>
+      <div class="movie-card-details">
+        <button mat-raised-button class="button-info" color="warn" (click)="getGenre(movie.Genre.Name, movie.Genre.Description)">Genre</button>
+        <button mat-raised-button class="button-info" color="warn" (click)="getDirector(movie.Director.Name, movie.Director.Bio,
+         movie.Director.Birthdate, movie.Director.Deathdate)">Director</button>
+        <button mat-raised-button class="button-info" color="warn" (click)="getSynopsis(movie.Title, movie.Description)">Synopsis</button>
+        <button 
+        mat-button *ngIf="!isFavMovie(movie._id)" (click)="addFavoriteMovies(movie._id)" color="warn"
+        matTooltip="Add to favorites">
+        <mat-icon > favorite_border</mat-icon>
+        </button>
+        <button 
+        mat-button *ngIf="isFavMovie(movie._id)" (click)="deleteFavoriteMovies(movie._id)" color="warn"
+        matTooltip="Remove from favorites">
+        <mat-icon > favorite</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  
