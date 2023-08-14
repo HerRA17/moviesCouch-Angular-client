@@ -6,10 +6,21 @@ $breaking-point-Tablet: 768px;
 .container{
     padding:1rem;
     background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 h1, h2, p, .content {
     color: orangered;
 }
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .Password, .Email, .Birthday {
     padding: 0px 6px;
 }
@@ -21,12 +32,34 @@ h1, h2, p, .content {
 
 // MEdia-queries
 @media (min-width: $breaking-point-Phone_S) {
-    
+    .form-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button-update, .button-delete {
+        margin: 10px 50px;
+    }
 }
 @media (min-width: $breaking-point-Phone_M) {
-    
+    .form-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button-update, .button-delete {
+        margin: 10px 50px;
+    }
 }
 @media (min-width: $breaking-point-Phone_L) {
+    .form-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .button-update, .button-delete {
         margin: 10px 50px;
     }
