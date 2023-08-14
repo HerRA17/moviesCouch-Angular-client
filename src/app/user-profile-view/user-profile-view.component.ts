@@ -41,7 +41,7 @@ getUserInfo(): any {
       this.retrievingServiceApiData.getAllMovies().subscribe((response: any) => {
         console.log('Response: ', response)
         console.log('User favorite movies' , this.user.favoriteMovies)
-        this.favoriteMovies = response.filter((Movie: any)=> this.user.FavoriteMovies.includes(Movie._id))
+        this.favoriteMovies = response.filter((movie: any)=> this.user.FavoriteMovies.includes(movie._id))
         console.log('Favorite movies after filtering', this.favoriteMovies);
         console.log('User after filtering', this.user);
       return this.user;
