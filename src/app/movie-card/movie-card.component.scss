@@ -1,23 +1,11 @@
-/* movie-card.component.scss */
-$breaking-point-Phone_S: 320px;
-$breaking-point-Phone_M: 375px;
-$breaking-point-Phone_L: 425px;
-$breaking-point-Tablet: 768px;
-/* Flex container for cards */
 .movie-card-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
     flex-wrap: wrap;
     justify-content: space-between;
     background-color: black;
   }
-  
-  /* Individual card styles */
-  .movie-card {
-    width: calc(33.33% - 20px); /* Adjust the card width to fit three cards per row */
-    margin-bottom: 20px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    overflow: hidden;
   
     .movie-card-title {
       font-size: 18px;
@@ -54,24 +42,4 @@ $breaking-point-Tablet: 768px;
         color: orangered;
       }
     }
-    // MEdia-queries
-    @media (min-width: $breaking-point-Phone_S) {
-
-    }
-    @media (min-width: $breaking-point-Phone_M) {
-
-    }
-    @media (min-width: $breaking-point-Phone_L) {
-        
-    }
-    @media (min-width: $breaking-point-Tablet) {
-      .movie-card-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        background-color: black;
-        width: 60vw;
-      }
-    }
-  }
    
