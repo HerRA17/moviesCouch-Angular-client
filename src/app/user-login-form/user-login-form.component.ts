@@ -23,13 +23,12 @@ export class UserLoginFormComponent implements OnInit {
     private router: Router ) {  } 
     ngOnInit(): void{ 
     }
-    // function responsible for sending the form inputs to the backend
+    /** function responsible for sending the form inputs to the backend */ 
     loginUser(): void {
       this.retrievingServiceApiData.userLogin(this.loginData).subscribe((response) => {
-        localStorage.setItem('user', response.user.Username); //check the logic to fix the bug
+        localStorage.setItem('user', response.user.Username);
         localStorage.setItem('token', response.token);
         this.router.navigate(['Movies']);
-        // logic for successful login
         this.dialogRef.close() //close dialog on success
         console.log(response);
         this.snackBar.open('Welcome back', 'Ok', {
