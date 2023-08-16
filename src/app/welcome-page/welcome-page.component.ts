@@ -8,18 +8,19 @@ import { UserLoginFormComponent } from '../user-login-form/user-login-form.compo
   templateUrl: './welcome-page.component.html',
   styleUrls: ['./welcome-page.component.scss']
 })
+/** Welcome page where user can register or login*/
 export class WelcomePageComponent {
   constructor(public dialog: MatDialog) {}
   ngOnInit(): void {
 
   }
-  // function opens dialog when sign up button is clicked
+  /** opens registration dialog */
   openUserRegistration(): void{
     this.dialog.open(UserRegistrationFormComponent, {
       width: '20rem'
     });
   }
-  // function opens dialog when login button is clicked
+  /**  opens login dialog */
   openUserLogin(): void{
   this.dialog.open(UserLoginFormComponent, {
     width: '20rem'
