@@ -29,5 +29,7 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "entryPoints": ["src/main.ts"],
+    "out": "docs"
 }
