@@ -9,7 +9,7 @@ import { MovieDetailsComponent } from '../movie-details/movie-details.component'
 import { DirectorComponent } from '../director/director.component';
 import { GenreComponent } from '../genre/genre.component';
 
-
+/** Component for displaying and managing movie card information */
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
@@ -31,7 +31,9 @@ export class MovieCardComponent {
 
  
   
-  //movies CRUD operations 
+  /** Gets all movies  
+   * @returns movies array
+   */ 
   getMovies(): void {
     this.retrivingServiceApiData.getAllMovies().subscribe((resp: any) => {
       console.log('movies', resp);
@@ -39,6 +41,9 @@ export class MovieCardComponent {
       return this.movies;
     })
   }
+  /** Gets a movie with the Title
+   * @returns movie object with title
+   */
   getMovie(title: string): void{
     this.retrivingServiceApiData.getMovie(title).subscribe((resp: string) => {
       console.log('title', resp);
@@ -46,7 +51,9 @@ export class MovieCardComponent {
       return this.movies;
     })
   }
-  
+  /** Gets the directors information
+   * @returns directors name, bio, birthdate, and deathdate
+  */
   getDirector(name: string, bio: string, birthdate: string, deaththdate: string): void {
     this.dialog.open(DirectorComponent, {
       data:{
@@ -58,7 +65,9 @@ export class MovieCardComponent {
       width: '25rem'
     });
   }
-
+  /** Gets the genre information
+   * @returns name and description of the genre
+  */
   getGenre(name: string, description: string): void {
     this.dialog.open(GenreComponent, {
       data: {
@@ -68,7 +77,9 @@ export class MovieCardComponent {
       width: '25rem'
     });
   }
-
+  /** Gets the description information
+   * @returns title and description
+  */
   getSynopsis(title: string, description: string): void {
     this.dialog.open(MovieDetailsComponent,  {
       data: {
@@ -78,12 +89,12 @@ export class MovieCardComponent {
       width: '25rem'
     });
   }
-  // Fav Movies CRUD operations
+   /** Adds the movie to the array of favorite movies
+    * @returns movie array with the added movie
+   */
   addFavoriteMovies(movieID: string): void{
     let username = localStorage.getItem('user');
-    console.log('movieID', movieID);
-    console.log('username', username);
-    if (username) {
+      if (username) {
       this.retrivingServiceApiData.addFavMovie(username, movieID).subscribe((resp) => { //error
         console.log(resp)
         this.snackBar.open('Movie has been added to favorite Movies', 'OK', {
@@ -93,16 +104,19 @@ export class MovieCardComponent {
       })
     } 
   }
-
+/** Determinates whether the movie is already within the array favorite movies
+ * @returns true or false
+*/
   isFavMovie(movieID: string): boolean {
     return this.favoriteMovies.includes(movieID);
   }
 
+  /** Deletes the movie from the array of favorite movies
+   * @returns the array without the movie deleted
+  */
   deleteFavoriteMovies(movieID: string): void {
     let username = localStorage.getItem('user');
-    console.log('username', username);
-    console.log('movieID', movieID);
-    if (username) {
+      if (username) {
       this.retrivingServiceApiData.deleteFavMovie(username, movieID).subscribe((resp) => {
         console.log(resp)
         this.snackBar.open('Movie removed from favorite Movies', 'OK', {
