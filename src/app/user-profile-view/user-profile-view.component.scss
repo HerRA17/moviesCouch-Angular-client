@@ -6,16 +6,25 @@ $breaking-point-Tablet: 768px;
 .container{
     padding:1rem;
     background-color: black;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    // flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-h1, h2, p, .content {
+h1 {
+    color: orangered;
+    align-items: center;
+}
+ h2, p, .content {
     color: orangered;
 }
+// .profile-data{
 
-.form-container{
+// }
+
+.functions, .form-container{
     display: flex;
     flex-direction: column;
     align-items: center;
