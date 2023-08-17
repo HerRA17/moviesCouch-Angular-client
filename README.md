@@ -3,31 +3,39 @@
 ## Table of Contents:
 * [Overview](#overview)
 * [How to Run](#how-to-run)
-* [Links](#links)
+* [LiveSite](#live-site)
 * [Technologies Used](#technologies-used)
 * [Dependencies](#dependencies)
 * [API](#api)
 * [Features](#features)
 * [Credits](#credentials)
+
+<a id="overview"></a>
 ## Overview
 Movies-Couch is the client-side part of the app, based on the existing server side. This movie app allows users to access information about different movies.
 Users can register, update, their personal data, and manage as well their favorite movies.
 I was the main Developer.
 The client side user interface complements REST API and MongoDB database whcich have been set up previously, providing a smooth experience for users. Built with MEAN-stack (MongoDB, Express, Angular, Node.js), Movies-Couch is a full-stack web application which offers a user-friendly, responsive and efficient solution for those seeking movie information and management.
 
+<a id="how-to-run"></a>
 ## How to run
 You can clone the repository.
 Required environments: nvm, node, npm
 Using nvm install one of the recomended node versions from Angular documentation(I used 16.14.3).
+
+<a id="live-site"></a>
 ## Live Site
 The link to the live site: <a href="https://movies-couch-angular-client.vercel.app/Welcome">movies couch angular </a>
 
+<a id="technologies-used"></a>
 ## Technologies used:
 * TypeScript
 * Angular
 * Angular Materials
 * SCSS
 * HTML
+
+<a id="dependencies"></a>
 ## Dependencies
 * "dependencies": {
     "@angular/animations": "^16.1.0",
@@ -59,8 +67,11 @@ The link to the live site: <a href="https://movies-couch-angular-client.vercel.a
     "typescript": "~5.1.3"
   }
 
+<a id="api"></a>
 ## API
 Information regarding the <a href="https://github.com/HerRA17/movies-couch_api" target="_blank">API</a> used in the Project(endpoints, dependencies, error response...) can be found <a href="" target="_blank">here</a>
+
+<a id="credentials"></a>
 ## Credits
 Tutor: Adewunmi bamishigbin
 Mentor: Joel Cross
