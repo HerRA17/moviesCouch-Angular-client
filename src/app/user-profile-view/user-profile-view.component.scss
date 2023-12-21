@@ -5,20 +5,26 @@ $breaking-point-Tablet: 768px;
 
 .container{
     padding:1rem;
-    background-color: black;
+    background-color: white;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    // flex-direction: column;
+    grid-area: 40px;
     align-items: center;
     justify-content: center;
+    justify-items: stretch;
 }
+
+.profile-data{
+    margin: 0px 0px 240px 0px;
+}
+
 h1 {
-    color: orangered;
+    color: #3f51b5;
     align-items: center;
 }
  h2, p, .content {
-    color: orangered;
+    color: #3f51b5;
 }
 // .profile-data{
 
@@ -35,7 +41,7 @@ h1 {
 }
 
 .button-update, .button-delete {
-    color: black !important;
+    color: white !important;
     margin: 0px 50px;
 }
 
