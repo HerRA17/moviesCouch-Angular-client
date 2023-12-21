@@ -5,6 +5,7 @@
       <h2>User Data:</h2>
       <p>Username: {{user.Username}}</p>
       <p>Email: {{user.Email}}</p>
+      <p>Birthdate: {{user.Birthday}}</p>
     </div>
     
   <div class="functions">
@@ -21,7 +22,7 @@
         <input matInput [(ngModel)]="userData.Birthdate" type="date" placeholder="Birthdate" name="Birthdate">
       </mat-form-field>
     </form>
-    <button mat-raised-button class="button-update" (click)="updateUser()" color="warn">
+    <button mat-raised-button class="button-update" (click)="updateUser()" color="primary">
       Update Account
     </button>
   
