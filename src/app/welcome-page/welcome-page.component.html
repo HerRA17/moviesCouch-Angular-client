@@ -6,7 +6,7 @@
       mat-raised-button
       (click)="openUserRegistration()"
       style="margin-right: 10px;"
-      color="warn"
+      color="primary"
     >Sign up
     </button>
     
@@ -14,7 +14,10 @@
     class="signup-login"
       mat-raised-button
       (click)="openUserLogin()"
-      color="warn">
+      color="primary">
       Login 
-    </button> 
+    </button>
+    <br>
+    <app-carousel [movies]="movies"></app-carousel>
+    
 </div>
