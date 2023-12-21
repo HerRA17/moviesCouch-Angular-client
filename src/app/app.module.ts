@@ -28,6 +28,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { DirectorComponent } from './director/director.component';
 import { GenreComponent } from './genre/genre.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 const appRoutes: Routes= [
   {path: 'Welcome', component: WelcomePageComponent },
@@ -47,6 +48,7 @@ const appRoutes: Routes= [
     MovieDetailsComponent,
     DirectorComponent,
     GenreComponent,
+    CarouselComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
