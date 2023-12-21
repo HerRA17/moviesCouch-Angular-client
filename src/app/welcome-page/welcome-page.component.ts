@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserRegistrationFormComponent } from '../user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
+import { RetrivingServiceAPIDataService } from '../retrieve-api-data.service';
 
 @Component({
   selector: 'app-welcome-page',
@@ -10,11 +11,16 @@ import { UserLoginFormComponent } from '../user-login-form/user-login-form.compo
 })
 /** Welcome page where user can register or login*/
 export class WelcomePageComponent {
-  constructor(public dialog: MatDialog) {}
+  movies: any[] = [];
+  constructor(
+      public dialog: MatDialog
+      ){}
+  
+  
   ngOnInit(): void {
-
   }
-  /** opens registration dialog */
+
+ /** opens registration dialog */
   openUserRegistration(): void{
     this.dialog.open(UserRegistrationFormComponent, {
       width: '20rem'
