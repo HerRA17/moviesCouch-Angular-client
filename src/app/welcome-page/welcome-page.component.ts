@@ -11,7 +11,12 @@ import { RetrivingServiceAPIDataService } from '../retrieve-api-data.service';
 })
 /** Welcome page where user can register or login*/
 export class WelcomePageComponent {
-  movies: any[] = [];
+  public slides = [
+    {src: "assets/img-carousel/previewAInfinityW.png"},
+    {src: "assets/img-carousel/previewEpisode3.png"},
+    {src: "assets/img-carousel/previewEpisode5.png"},
+    {src: "assets/img-carousel/previewLOTR.png"},
+  ];
   constructor(
       public dialog: MatDialog
       ){}
